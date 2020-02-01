@@ -11,4 +11,4 @@
 > Besides the information presented for this dataset on kaggle, there is also particular information about the columns we used in this project. This information can be found in ```prjct_summry.ipynb``` file.\
 
 ### 2.2 plots.ipynb 
-> All graphs drawn in this file comprising the main part of our project. These gives us the insight necessary in the rest of the project.
+> All graphs drawn in this file comprising the main part of our project, gives us the insight necessary in the rest of the project.
