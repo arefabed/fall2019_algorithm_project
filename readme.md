@@ -1,5 +1,4 @@
 # Poject Architecture
----
 ## 1 Directories
 ### 1.1 ./data/
 > The dataset downloaded from [kaggle](https://www.kaggle.com/daveianhickey/2000-16-traffic-flow-england-scotland-wales#ukTrafficAADF.csv) and saved in the ```data``` directory.\
