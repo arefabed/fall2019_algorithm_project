@@ -6,7 +6,8 @@ def traffic_vs_year():
                               'CarsTaxis', 'BusesCoaches',
                               'LightGoodsVehicles', 'V2AxleRigidHGV'])
 
-    c = {2005: 0, 2006: 0, 2007: 0, 2009: 0, 2010: 0, 2011: 0, 2012: 0, 2013: 0, 2014: 0}
+    c = {2005: 0, 2006: 0, 2007: 0, 2009: 0,
+         2010: 0, 2011: 0, 2012: 0, 2013: 0, 2014: 0}
     # for data in df:
     #     temp = data["Date"]
     #     for i in temp:
