@@ -12,3 +12,6 @@
 
 ### 2.2 plots.ipynb 
 > All graphs drawn in this file comprising the main part of our project, gives us the insight necessary in the rest of the project.
+
+### 2.3 update_fork.sh
+> This file keeps you up-to-date with master branch of this repository.
