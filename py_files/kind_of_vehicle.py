@@ -24,4 +24,4 @@ def kind_of_vehicle():
         del keys['AADFYear']
         for item in keys:
             c[row['AADFYear']][item] += row[item]
-        return c
+    return c
