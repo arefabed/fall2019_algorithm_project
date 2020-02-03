@@ -1,4 +1,4 @@
-def traffic_vs_year():
+def traffic_per_year():
     import pandas as pd
     from tqdm import tqdm
     
