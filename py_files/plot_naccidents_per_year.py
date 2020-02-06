@@ -1,6 +1,5 @@
 def naccidents_per_year():
     import pandas as pd
-    import datetime as dt
     from tqdm import tqdm
 
     print('reading files...')
