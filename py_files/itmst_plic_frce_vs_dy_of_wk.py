@@ -8,6 +8,5 @@ class NPoliceVsDayOfWeek(ItemSetMinerBase):
 
         super().read_data(self.fields)
         super().generate_enumeration_dic()
-    
         
     
