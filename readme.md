@@ -13,5 +13,8 @@
 ### 2.2 plots.ipynb 
 > All graphs drawn in this file comprising the main part of our project, gives us the insight necessary in the rest of the project.
 
-### 2.3 update_fork.sh
+### 2.3 itemset_minig.ipynb 
+>Helps us know if there is any frequent pattern in accidents provided that the dataset partially considered as a transaction based information.
+
+### 2.4 update_fork.sh
 > This file keeps foked repos up-to-date with master branch of this repository.
