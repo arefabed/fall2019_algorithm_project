@@ -8,7 +8,6 @@ class ItemSetMinerBase:
     def __init__(self):
 
         self.data = None
-        self.fields = None
         self.enumeration_dic = {}
         self.itemset_dic = {}
 
@@ -16,7 +15,7 @@ class ItemSetMinerBase:
         print('reading files...')
 
         df = [pd.read_csv('data/accidents_2005_to_2007.csv',
-                          usecols=fields, nrows=15000)]  # ,
+                          usecols=fields, nrows=30000)]  # ,
         #   pd.read_csv('data/accidents_2009_to_2011.csv',
         #               usecols=fields),
         #   pd.read_csv('data/accidents_2012_to_2014.csv',
@@ -68,4 +67,37 @@ class ItemSetMinerBase:
         print('Q4: ', q4)
         mean = np.mean(temp)
         print('mean: ', mean)
-        return q0,q1,q2,q3,q4,mean
+        return q0, q1, q2, q3, q4, mean
+
+# Data Mining and Analysis:Fundamental Concepts and Algorithms Mohammed J. Zaki Wagner Meira Jr.
+
+    def _dEclat(self, p: (int, list, int), minsup: int, f: list):
+        self.declat_depth += 1
+        if(self.declat_depth > 1000):
+            raise BufferError("too many layers")
+        for i, di, si in p:
+            self.frequent_itemsets.append((set(i), si))
+            p0 = []
+            for j, dj, sj in p:
+                if(j <= i):
+                    continue
+                ij = i+j
+                dij = [item for item in dj if item not in di]
+                sij = si - len(dij)
+                if(sij > minsup):
+                    p0.append((ij, dij, sij))
+            if p0:
+                self._dEclat(p0, minsup, self.frequent_itemsets)
+
+    def dEclat(self, minsup):
+        self.declat_depth = 0
+        self.frequent_itemsets = []
+        uniques = list(range(len(self.enumeration_dic.keys())))
+        p = [([key], [item for item in uniques if item not in value], len(value))
+             for key, value in self.itemset_dic.items() if len(value) > minsup]
+        self._dEclat(p, minsup, self.frequent_itemsets)
+        del self.declat_depth
+        print(self.frequent_itemsets)
+
+    def association_rules():
+        pass
