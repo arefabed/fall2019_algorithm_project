@@ -1,6 +1,8 @@
 from tqdm import tqdm
 import pandas as pd
 import numpy as np
+from py_files.itmst_set_mnipultn import SmartSet
+
 
 class ItemSetMinerBase:
 
@@ -14,11 +16,11 @@ class ItemSetMinerBase:
         print('reading files...')
 
         df = [pd.read_csv('data/accidents_2005_to_2007.csv',
-                          usecols=fields, nrows=300)]  # ,
-        #   pd.read_csv('data/accidents_2009_to_2011.csv',
-        #               usecols=fields),
-        #   pd.read_csv('data/accidents_2012_to_2014.csv',
-        #               usecols=fields)]
+                          usecols=fields) ,
+           pd.read_csv('data/accidents_2009_to_2011.csv',
+                       usecols=fields),
+           pd.read_csv('data/accidents_2012_to_2014.csv',
+                       usecols=fields)]
 
         self.data = pd.concat(df)
 
@@ -101,13 +103,19 @@ class ItemSetMinerBase:
 # Data Mining and Analysis:Fundamental Concepts and Algorithms Mohammed J. Zaki Wagner Meira Jr.
 
     def association_rules(self, minconf):
-        #self.frequent_itemsets = [({1}, 7), ({1, 3}, 7), ({3}, 7)]
-        for item, sup in self.frequent_itemsets:
+        for item, supz in self.frequent_itemsets:
             if(len(item) < 2):
                 continue
-            A = [find_subsets(item,i) for i in range(1,len(item))]
-            while len(A) > 0:
-                x = find_maximal_subset(*A)
-                break
-
-
+            smart = SmartSet(item)
+            smart.find_subsets()
+            while len(smart.sbsts) > 0:
+                x = smart.find_maximal_subset()
+                smart.remove_set(x)
+                for i, sup in self.frequent_itemsets:
+                    if i == set(x):
+                        supx = sup
+                c = supz/supx
+                if c > minconf:
+                    print(x, ' ----> ', smart.complement(x), ' conf: ', c)
+                else:
+                    smart.remove_subsets(x)
