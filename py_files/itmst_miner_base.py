@@ -29,6 +29,8 @@ class ItemSetMinerBase:
 
         uniques = 0
         for i in tqdm(self.data.index):
+            if not(i % 10   == 0): # random jumps reducing computation intensity
+                continue
             if self.data.iloc[i, 1] not in self.enumeration_dic:
                 self.enumeration_dic[self.data.iloc[i, 1]] = uniques
                 self.data.iloc[i, 1] = uniques
@@ -74,7 +76,7 @@ class ItemSetMinerBase:
 
     def _dEclat(self, p: (int, list, int), minsup: int, f: list):
         self.declat_depth += 1
-        if(self.declat_depth > 1000):
+        if(self.declat_depth > 100):
             raise BufferError("too many layers")
         for i, di, si in p:
             self.frequent_itemsets.append((set(i), si))
@@ -116,6 +118,7 @@ class ItemSetMinerBase:
                         supx = sup
                 c = supz/supx
                 if c > minconf:
-                    print(x, ' ----> ', smart.complement(x), ' conf: ', c)
+                    print(x, '\t\t---->\t', smart.complement(x), ' conf: ', c)
+                    break
                 else:
                     smart.remove_subsets(x)
