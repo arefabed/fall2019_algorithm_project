@@ -1,4 +1,4 @@
-from py_files.ItemSetMinerBase import ItemSetMinerBase
+from py_files.itmst_miner_base import ItemSetMinerBase
 
 class NPoliceVsDayOfWeek(ItemSetMinerBase):
     def __init__(self):

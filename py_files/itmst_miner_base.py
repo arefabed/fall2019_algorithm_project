@@ -2,7 +2,6 @@ from tqdm import tqdm
 import pandas as pd
 import numpy as np
 
-
 class ItemSetMinerBase:
 
     def __init__(self):
@@ -15,7 +14,7 @@ class ItemSetMinerBase:
         print('reading files...')
 
         df = [pd.read_csv('data/accidents_2005_to_2007.csv',
-                          usecols=fields, nrows=30000)]  # ,
+                          usecols=fields, nrows=300)]  # ,
         #   pd.read_csv('data/accidents_2009_to_2011.csv',
         #               usecols=fields),
         #   pd.read_csv('data/accidents_2012_to_2014.csv',
@@ -99,5 +98,16 @@ class ItemSetMinerBase:
         del self.declat_depth
         print(self.frequent_itemsets)
 
-    def association_rules():
-        pass
+# Data Mining and Analysis:Fundamental Concepts and Algorithms Mohammed J. Zaki Wagner Meira Jr.
+
+    def association_rules(self, minconf):
+        #self.frequent_itemsets = [({1}, 7), ({1, 3}, 7), ({3}, 7)]
+        for item, sup in self.frequent_itemsets:
+            if(len(item) < 2):
+                continue
+            A = [find_subsets(item,i) for i in range(1,len(item))]
+            while len(A) > 0:
+                x = find_maximal_subset(*A)
+                break
+
+
