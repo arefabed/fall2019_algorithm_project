@@ -10,20 +10,20 @@ def naccident_per_road_type():
 
     print('computing...')
 
-
-
     c = {}
-    road_type = {'Single carriageway': 0, 'Motorcycles': 0,
-               'CarsTaxis': 0, 'BusesCoaches': 0,
-               'LightGoodsVehicles': 0, 'V2AxleRigidHGV': 0}
-
-    for row_ind in tqdm(df.index):
-        row = df.iloc[row_ind, :]
-        keys = row.to_dict()
-        if row['AADFYear'] not in c:
-            c[row['AADFYear']] = dict(vehicle)
-        del keys['AADFYear']
-        for item in keys:
-            c[row['AADFYear']][item] += row[item]
+    road_type = {'Single carriageway': 0, 'Dual carriageway': 0,
+                 'One way street': 0, 'Roundabout': 0,
+                 'Slip road': 0, 'Unknown': 0}
+    for item in df:
+        for row_ind in tqdm(item.index):
+            row = item.iloc[row_ind, :]
+            keys = row.to_dict()
+            if row['Year'] not in c:
+                c[row['Year']] = dict(road_type)
+            c[row['Year']][row['Road_Type']] += 1
 
     return c
+
+
+if __name__ == '__main__':
+    naccident_per_road_type()
