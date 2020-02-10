@@ -4,14 +4,26 @@ def naccident_per_road_type():
 
     print('reading files...')
 
-    df = pd.read_csv('data/ukTrafficAADF.csv',
-                     usecols=['AADFYear', 'LinkLength_km',
-                              'Road_Type', 'Motorcycles',
-                              'CarsTaxis', 'BusesCoaches',
-                              'LightGoodsVehicles', 'V2AxleRigidHGV'])
+    df = [pd.read_csv('data/accidents_2005_to_2007.csv', usecols=['Year', 'Road_Type']),
+          pd.read_csv('data/accidents_2009_to_2011.csv', usecols=['Year', 'Road_Type']),
+          pd.read_csv('data/accidents_2012_to_2014.csv', usecols=['Year', 'Road_Type'])]
 
     print('computing...')
 
-    c = {2005: 0, 2006: 0, 2007: 0, 2008: 0, 2009: 0,
-         2010: 0, 2011: 0, 2012: 0, 2013: 0, 2014: 0}
 
+
+    c = {}
+    road_type = {'Single carriageway': 0, 'Motorcycles': 0,
+               'CarsTaxis': 0, 'BusesCoaches': 0,
+               'LightGoodsVehicles': 0, 'V2AxleRigidHGV': 0}
+
+    for row_ind in tqdm(df.index):
+        row = df.iloc[row_ind, :]
+        keys = row.to_dict()
+        if row['AADFYear'] not in c:
+            c[row['AADFYear']] = dict(vehicle)
+        del keys['AADFYear']
+        for item in keys:
+            c[row['AADFYear']][item] += row[item]
+
+    return c
